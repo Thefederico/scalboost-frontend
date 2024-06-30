@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dialog";
 import { DialogClose } from "@radix-ui/react-dialog";
 import ProductForm from "../Products/ProductForm";
+import { getCsvProducts } from "@/services/products";
 
 interface Props {
   maxPrice: number | null;
@@ -48,6 +49,16 @@ export default function FiltersBox({
 
   const toggleDialog = () => setIsOpen((prev) => !prev);
 
+  const downloandCsv = async () => {
+    const file = await getCsvProducts();
+    const url = URL.createObjectURL(file as Blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "products.csv";
+    a.click();
+    a.remove();
+  };
+
   return (
     <section className="flex justify-center space-x-4 my-10">
       <Dialog open={isOpen}>
@@ -67,6 +78,10 @@ export default function FiltersBox({
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      <Button type="button" onClick={downloandCsv}>
+        CSV
+      </Button>
 
       <Button type="button" onClick={toggleDialog}>
         Agregar

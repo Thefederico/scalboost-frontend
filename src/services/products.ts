@@ -41,3 +41,14 @@ export const createProduct = async ({
     throw new Error("Failed to create product");
   }
 };
+
+export const getCsvProducts = async () => {
+  try {
+    const { data } = await axios.get(`${baseURL}/products/csv`, {
+      responseType: "blob",
+    });
+    return data;
+  } catch (error) {
+    console.log("Error fetching csv products: ", error);
+  }
+};
