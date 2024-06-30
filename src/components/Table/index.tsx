@@ -45,7 +45,7 @@ export default function Table({
               className="cursor-crosshair hover:underline"
               onClick={() => changeSort(SortBy.CATEGORY)}
             >
-              Categoria
+              Categoría
             </th>
             <th
               className="cursor-crosshair hover:underline"
@@ -88,12 +88,12 @@ export default function Table({
                 </td>
                 <td className={`min-w-[140px] ${color}`}>
                   <Button
-                    className="text-primary w-full"
+                    className="text-primary w-full border-none"
                     variant="outline"
                     type="button"
                     onClick={() => handleDelete(product._id)}
                   >
-                    Delete
+                    Eliminar
                   </Button>
                 </td>
               </tr>

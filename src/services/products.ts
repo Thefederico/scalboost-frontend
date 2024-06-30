@@ -1,4 +1,9 @@
-import { Params, Products } from "@/common/types/products";
+import {
+  Params,
+  Product,
+  ProductPayload,
+  Products,
+} from "@/common/types/products";
 import axios from "axios";
 
 export const getProducts = async ({ params }: { params?: Params }) => {
@@ -20,5 +25,21 @@ export const deleteProduct = async ({ id }: { id: string }) => {
     return response;
   } catch (error) {
     console.log("Error deleting product: ", error);
+  }
+};
+
+export const createProduct = async ({
+  product,
+}: {
+  product: ProductPayload;
+}) => {
+  try {
+    const response = await axios.post<Product>(
+      "http://localhost:8000/products",
+      product
+    );
+    return response;
+  } catch (error) {
+    throw new Error("Failed to create product");
   }
 };

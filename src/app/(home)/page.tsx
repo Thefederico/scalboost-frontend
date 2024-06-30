@@ -1,4 +1,4 @@
-import Products from "@/components/Products.tsx/Products";
+import Products from "@/components/Products/Products";
 
 export default async function Home() {
   return (

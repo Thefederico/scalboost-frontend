@@ -1,14 +1,18 @@
 import { create } from "zustand";
 
-import { Params, Products, SortBy } from "@/common/types/products";
+import { Products, SortBy } from "@/common/types/products";
 
 interface ProductsState {
   products: Products;
   highlight: boolean;
-  minPrice: number;
-  maxPrice: number;
+  limit: number;
+  offset: number;
+  minPrice: number | null;
+  maxPrice: number | null;
   searchName: string;
   sorting: SortBy;
+  hasMoreProducts: boolean;
+  category: string | null;
 
   setProducts: (products: Products) => void;
   toggleHighlight: () => void;
@@ -16,15 +20,23 @@ interface ProductsState {
   setMaxPrice: (maxPrice: number) => void;
   setSearchName: (searchName: string) => void;
   setSorting: (sorting: SortBy) => void;
+  setLimit: (limit: number) => void;
+  setOffset: (offset: number) => void;
+  setHasMoreProducts: (hasMoreProducts: boolean) => void;
+  setCategory: (category: string | null) => void;
 }
 
 export const useProductsStore = create<ProductsState>((set, get) => ({
   products: [],
   highlight: false,
-  minPrice: 0,
-  maxPrice: 0,
+  limit: 10,
+  offset: 0,
+  minPrice: null,
+  maxPrice: null,
   searchName: "",
   sorting: SortBy.NONE,
+  hasMoreProducts: true,
+  category: null,
 
   setProducts: (products) => {
     set({ products });
@@ -33,7 +45,6 @@ export const useProductsStore = create<ProductsState>((set, get) => ({
     const prev = get().highlight;
     set({ highlight: !prev });
   },
-
   setMinPrice: (minPrice) => {
     set({ minPrice });
   },
@@ -45,5 +56,17 @@ export const useProductsStore = create<ProductsState>((set, get) => ({
   },
   setSorting: (sorting) => {
     set({ sorting });
+  },
+  setLimit: (limit) => {
+    set({ limit });
+  },
+  setOffset: (offset) => {
+    set({ offset });
+  },
+  setHasMoreProducts: (hasMoreProducts) => {
+    set({ hasMoreProducts });
+  },
+  setCategory: (category) => {
+    set({ category });
   },
 }));

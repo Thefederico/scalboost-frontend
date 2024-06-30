@@ -10,6 +10,15 @@ export interface Product {
   category: string;
 }
 
+export interface ProductPayload {
+  category: string;
+  name: string;
+  stock: string;
+  description: string;
+  price: string;
+  imageUrl: string;
+}
+
 export enum Categories {
   "T-Shirt",
   "Hoodie",
