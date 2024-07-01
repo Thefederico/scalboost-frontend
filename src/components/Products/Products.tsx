@@ -104,7 +104,7 @@ export default function Products() {
   const sortedProducts = useMemo(() => {
     if (sorting === SortBy.NONE) return products;
     if (sorting === SortBy.PRICE_ASCENDING) {
-      return products.toSorted((a, b) => b.price - a.price);
+      return products.toSorted((a: { price: number; }, b: { price: number; }) => b.price - a.price);
     }
 
     const compareProperties: Record<string, (product: Product) => any> = {
@@ -114,7 +114,7 @@ export default function Products() {
       [SortBy.DESCRIPTION]: (product: Product): string => product.description,
     };
 
-    return products.toSorted((a, b) => {
+    return products.toSorted((a: Product, b: Product) => {
       const extactProperty = compareProperties[sorting];
       return extactProperty(a).localeCompare(extactProperty(b));
     });
@@ -128,6 +128,8 @@ export default function Products() {
           offset,
         },
       }).then((res) => {
+        if (res)
+
         setProducts(res ?? []);
         initialProducts.current = res ?? [];
       });

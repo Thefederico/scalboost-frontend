@@ -69,12 +69,15 @@ export default function FiltersBox({
           <div>
             <ProductForm />
           </div>
-          <DialogFooter className="sm:justify-start">
-            <DialogClose asChild>
-              <Button type="button" variant="secondary" onClick={toggleDialog}>
-                Close
-              </Button>
-            </DialogClose>
+          <DialogFooter className="flex justify-center items-center w-full">
+            <Button
+              className="mx-auto"
+              type="button"
+              variant="secondary"
+              onClick={toggleDialog}
+            >
+              Cerrar
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
