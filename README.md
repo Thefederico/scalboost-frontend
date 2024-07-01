@@ -1,36 +1,152 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Prueba técnica Scalboost
 
-## Getting Started
+### Tecnologías utilizadas
 
-First, run the development server:
+-- Cliente: 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- React / Next.js 14 ⚙️
+
+- TypeScript ₸
+
+- TailwindCss 🍃
+
+- Zustand 🛠️
+
+-- Servidor:
+
+- Nestjs 🦁
+
+- MongoDB/Mongoose
+
+Para los despliegues de las aplicaciones se utilizó:
+- Cliente [Netlify](https://www.netlify.com/): https://scalboost-products.netlify.app/
+- Servidor [Render](https://www.render.com/): https://scalboost-backend.onrender.com
+
+## Estructura de carpetas
+
+```
+server
+├─ .eslintrc.js
+├─ .gitignore
+├─ .prettierrc
+├─ README.md
+├─ docker-compose.yml
+├─ nest-cli.json
+├─ package-lock.json
+├─ package.json
+├─ sql
+│  ├─ courses_table.sql
+│  └─ users_table.sql
+├─ src
+│  ├─ app.controller.spec.ts
+│  ├─ app.controller.ts
+│  ├─ app.module.ts
+│  ├─ app.service.ts
+│  ├─ config
+│  │  └─ configuration.ts
+│  └─ main.ts
+├─ test
+│  ├─ app.e2e-spec.ts
+│  └─ jest-e2e.json
+├─ tsconfig.build.json
+└─ tsconfig.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```
+client
+├─ .env.example
+├─ .eslintrc.json
+├─ .gitignore
+├─ components.json
+├─ next.config.mjs
+├─ package.json
+├─ pnpm-lock.yaml
+├─ postcss.config.mjs
+├─ public
+│  ├─ next.svg
+│  └─ vercel.svg
+├─ README.md
+├─ src
+│  ├─ app
+│  │  ├─ (home)
+│  │  │  ├─ loading.tsx
+│  │  │  └─ page.tsx
+│  │  ├─ favicon.ico
+│  │  ├─ globals.css
+│  │  └─ layout.tsx
+│  ├─ common
+│  │  └─ types
+│  │     └─ products.ts
+│  ├─ components
+│  │  ├─ Products
+│  │  │  ├─ ProductForm.tsx
+│  │  │  └─ Products.tsx
+│  │  ├─ Table
+│  │  │  ├─ FiltersBox.tsx
+│  │  │  └─ index.tsx
+│  │  └─ ui
+│  │     ├─ avatar.tsx
+│  │     ├─ button.tsx
+│  │     ├─ dialog.tsx
+│  │     ├─ form.tsx
+│  │     ├─ input.tsx
+│  │     ├─ label.tsx
+│  │     ├─ select.tsx
+│  │     └─ sonner.tsx
+│  ├─ lib
+│  │  └─ utils.ts
+│  ├─ services
+│  │  └─ products.ts
+│  └─ store
+│     └─ products.ts
+├─ tailwind.config.ts
+└─ tsconfig.json
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Servidor en modo desarrollo
+El servicio está en producción en el link https://scalboost-backend.onrender.com. Para este despliegue se utilizó el plan gratuito [Render.com](https://render.com). Por favor, tenga en cuenta que este plan tiene limitaciones en cuanto a la capacidad de rendimiento, además de que el servidor se apaga cuando no lo usan, por lo que puede tardar un poco en responder.
+ 
+Para correr el servicio en modo desarrollo, sigue estos pasos:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```(bash)
+git clone https://github.com/Thefederico/scalboost-backend.git
 
-## Learn More
+#Instalar dependencias
+npm install
 
-To learn more about Next.js, take a look at the following resources:
+#Modo desarrollo
+npm run start:dev
+```
+- Agregar las  variables de entorno en el archivo .env, con la siguiente estructura:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Variables de entorno](https://drive.google.com/file/d/1fqu3Em0utzVGnvaJ6GQ1CPKAHPJXDCcp/view?usp=sharing)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```
+PORT=8000
+DATABASE_URL=
+```
 
-## Deploy on Vercel
+## Cliente en modo desarrollo
+Agreagar las variables de entorno al archivo .env.local:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```(txt)
+NEXT_PUBLIC_API_URL_BASE="https://scalboost-backend.onrender.com"
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Si decidió usar el backend local, agregue la siguiente variable de entorno:
+
+```(txt)
+NEXT_PUBLIC_API_URL_BASE="http://localhost:8000"
+```
+
+###  Iniciar el cliente en modo desarrollo:
+
+```(bash)
+git clone https://github.com/Thefederico/scalboost-frontend.git
+
+# Instalar dependencias
+npm install
+
+#Modo desarrollo
+npm run dev
+```
